@@ -29,21 +29,22 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    background: rgba(0, 0, 0, 0.5) url('{{ img_src| img_url: '360x' }}');
+    background-color: rgba(0, 0, 0, 0.5);
+    background-image: url('{{ img_src| img_url: '360x' }}');
   }
 
 
   @media screen and (min-width: 640px) {
     .banner-imag.fixed-heigh {
-
-      background: rgba(0, 0, 0, 0.5) url('{{ img_src| img_url: '720x' }}');
+      background-color: rgba(0, 0, 0, 0.5);
+      background-image: url('{{ img_src| img_url: '720x' }}');
     }
   }
   @media screen and (min-width: 1024px) {
     .banner-imag.fixed-heigh {
+      background-color: rgba(0, 0, 0, 0.5);
+      background-image: url('{{ img_src| img_url: '2048x' }}') height: 600px;
 
-      height: 600px;
-      background: rgba(0, 0, 0, 0.5) url('{{ img_src| img_url: '2048x' }}');
     }
 
   }

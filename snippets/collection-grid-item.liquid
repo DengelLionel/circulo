@@ -1,0 +1,26 @@
+{%- liquid
+  if items_per_row == 2
+    assign col_class = 'half'
+  elsif items_per_row == 3
+    assign col_class = 'third'
+  elsif items_per_row == 5
+    assign col_class = 'fifth'
+  else
+    assign col_class = 'quarter'
+  endif
+-%}
+
+<div class="prod-block coll-block column {{ col_class }}"{% if animate %} data-cc-animate="cc-fade-in-up" data-cc-animate-delay="{{ animate | times: 0.15 }}s"{% endif %} {{ block.shopify_attributes }}>
+  <div class="prod-image-wrap">
+    <a href="{{ collection.url }}">
+      {%- render 'responsive-image', image: image, aspect_ratio: aspect_ratio -%}
+    </a>
+  </div>
+  <div class="prod-caption">
+    <a href="{{ collection.url }}">
+      <div class="title">
+        {{ collection.title }}
+      </div>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,122 @@
+{% style %}
+  #{{ section.id }},
+  #{{ section.id }} .section-content {
+    background-color: {{ section.settings.color_bg }} !important;
+  }
+  {%- unless section.settings.color_text contains ',0' -%}
+    #{{ section.id }} .rich-text__text {
+      color: {{ section.settings.color_text }};
+    }
+  {%- endunless -%}
+  {%- unless section.settings.color_head contains ',0' -%}
+    #{{ section.id }} {
+      color: {{ section.settings.color_head }};
+    }
+  {%- endunless -%}
+{% endstyle %}
+
+{%- liquid
+  if section.blocks.size == 3
+    assign column_width = 'third'
+  elsif section.blocks.size == 2
+    assign column_width = 'half'
+  else section.blocks.size == 1
+    assign column_width = 'full'
+  endif
+-%}
+
+<div class="{% if section.settings.color_bg contains ',0' or section.settings.color_bg == settings.col_page_bg %}spaced-section{% else %}padded-section{% endif %} rich-text" id="{{ section.id }}" data-section-type="rich-text">
+  <div class="container section-content">
+    <div class="grid">
+      {%- for block in section.blocks -%}
+        <div class="column {{ column_width }}" {{ block.shopify_attributes }} data-cc-animate="cc-fade-in-up" data-cc-animate-delay="{{ forloop.index | times: 0.15 }}s">
+          <div class="rte reading-width align-center">
+            {%- if block.settings.title != blank -%}
+              <h2 class="rich-text__title">{{ block.settings.title | escape }}</h2>
+            {%- endif -%}
+            <div class="rich-text__text">
+              {{ block.settings.text }}
+            </div>
+            {% if block.settings.link_text != blank %}
+              <div class="h2-margin-top">
+                <a class="feature-link" href="{{ block.settings.link_url }}">
+                  {{- block.settings.link_text -}}
+                </a>
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Rich text columns",
+    "settings": [
+      {
+        "type": "color",
+        "id": "color_bg",
+        "label": "Background color",
+        "default": "rgba(0,0,0,0)"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text color",
+        "default": "#454f5b"
+      },
+      {
+        "type": "color",
+        "id": "color_head",
+        "label": "Heading and link color",
+        "default": "#212b36"
+      }
+    ],
+    "max_blocks": 3,
+    "blocks": [
+      {
+        "type": "text",
+        "name": "Rich text",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Heading",
+            "default": "Rich text"
+          },
+          {
+            "type": "richtext",
+            "id": "text",
+            "label": "Text",
+            "default": "<p>Use this text to share information about your store with your customers.<\/p><p>Describe product, share announcements, or welcome customers to your store.<\/p>"
+          },
+          {
+            "type": "text",
+            "id": "link_text",
+            "label": "Link text"
+          },
+          {
+            "type": "url",
+            "id": "link_url",
+            "label": "Link URL"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Rich text columns",
+        "blocks": [
+          {
+            "type": "text"
+          },
+          {
+            "type": "text"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

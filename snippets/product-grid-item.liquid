@@ -1,0 +1,54 @@
+{%- liquid
+  assign on_sale = false
+  if product.compare_at_price > product.price
+    assign on_sale = true
+  endif
+
+  if items_per_row == 2
+    assign col_class = 'half'
+  elsif items_per_row == 3
+    assign col_class = 'third'
+  elsif items_per_row == 5
+    assign col_class = 'fifth'
+  else
+    assign col_class = 'quarter'
+  endif
+-%}
+
+<div class="prod-block column {{ col_class }}{% unless product.available %} sold-out{% endunless %}{% if on_sale %} on-sale{% endif %}"{% if animate %} data-cc-animate="cc-fade-in-up" data-cc-animate-delay="{{ animate | times: 0.15 }}s"{% endif %} {{ block.shopify_attributes }}>
+  <div class="prod-image-wrap{% if settings.product_hover_image and product.media.size > 1 %} prod-image-wrap--with-hover{% endif %}">
+    <a href="{{ product.url | within: collection }}">
+      {%- render 'responsive-image', image: product.featured_media.preview_image, aspect_ratio: aspect_ratio -%}
+      {%- if settings.product_hover_image and product.media.size > 1 -%}
+        <div class="hover-image">
+          {%- render 'responsive-background', image: product.media[1].preview_image -%}
+        </div>
+      {%- endif -%}
+      {%- render 'product-label', product: product -%}
+    </a>
+  </div>
+  <div class="prod-caption">
+    <a href="{{ product.url | within: collection }}">
+      <div class="title">
+        {%- if grid_show_vendor -%}
+          <div class="prod-caption__vendor">{{ product.vendor }}</div>
+        {%- endif -%}
+        {{ product.title }}
+      </div>
+      <div class="product-price">
+        {% if product.price_varies %}
+          <span class="product-price__from">{{ 'products.listing.from' | t }}</span>
+        {% endif %}
+        <span class="product-price__amount theme-money">{{ product.price | money }}</span>
+        {% if on_sale %}
+          <span class="product-price__compare theme-money">{{ product.compare_at_price | money }}</span>
+        {% endif %}
+        {%- assign variant = product.variants | sort: 'price' | first -%}
+        {%- render 'unit-price', variant: variant -%}
+      </div>
+      {%- if settings.enable_reviews_collection -%}
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+      {%- endif -%}
+    </a>
+  </div>
+</div>

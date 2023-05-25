@@ -1,0 +1,57 @@
+{%- if cta.settings.image != blank or cta.settings.title != blank or cta.settings.subheading != blank or cta.settings.button_label != blank -%}
+  <li class="nav-ctas__cta{% if cta.settings.image == blank %} nav-ctas__cta--no-image{% endif %}" {{ block.shopify_attributes }}>
+    {%- unless cta.settings.cta_link == blank -%}
+      <a data-cc-animate-click class="inner image-overlay image-overlay--bg-full" href="{{ cta.settings.cta_link }}">
+    {% else %}
+      <div class="inner image-overlay image-overlay--bg-full">
+    {%- endunless -%}
+
+    {%- if cta.settings.image != blank -%}
+      <div class="rimage-outer-wrapper rimage-background lazyload fade-in"
+           style="padding-top:{{ 1 | divided_by: cta.settings.image.aspect_ratio | times: 100 }}%"
+           data-bgset="{% render 'bgset', image: cta.settings.image %}"
+           data-sizes="auto"
+           data-parent-fit="cover">
+        <noscript>
+          <div class="rimage-wrapper" style="padding-top:{{ 1 | divided_by: cta.settings.image.aspect_ratio | times: 100 }}%">
+            <img data-swift-lazy="1" loading="lazy" src="{{ cta.settings.image | img_url: '1024x1024' }}" alt="{{ cta.settings.image.alt | escape }}" class="rimage__image">
+          </div>
+        </noscript>
+      </div>
+
+      {%- unless settings.tint_color contains ',0' -%}
+        <div class="image-tint" style="background-color: {{ settings.tint_color }};opacity: {{ settings.tint_opacity | divided_by: 100.00 }};"></div>
+      {%- endunless -%}
+    {%- endif -%}
+
+    <div class="overlay {% if cta.settings.image == blank %}overlay--no-image{% endif %}">
+      <div class="inner" style="{% if cta.settings.image != blank %}color: {{ settings.text_color }};{% endif %}">
+        <div class="innest">
+          {%- if cta.settings.title != blank -%}
+            <h2 class="overlay__title">
+              {{ cta.settings.title | newline_to_br }}
+            </h2>
+          {%- endif -%}
+
+          {%- if cta.settings.subheading != blank -%}
+            <div class="overlay__subheading">
+              {{ cta.settings.subheading | escape }}
+            </div>
+          {% endif %}
+
+          {%- if cta.settings.button_label != blank -%}
+            <div class="overlay__link feature-link">
+              {{ cta.settings.button_label | escape }}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    {%- unless cta.settings.cta_link == blank -%}
+      </a>
+    {% else %}
+      </div>
+    {%- endunless -%}
+  </li>
+{%- endif -%}

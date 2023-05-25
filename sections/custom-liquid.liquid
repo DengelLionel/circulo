@@ -1,0 +1,29 @@
+<div class="spaced-section{% unless section.settings.skip_container %} container{% endunless %}" data-cc-animate>
+  {{ section.settings.custom_liquid }}
+</div>
+
+{% schema %}
+  {
+    "name": "Custom Liquid",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "skip_container",
+        "label": "Full page width",
+        "default": false
+      },
+      {
+        "type": "liquid",
+        "id": "custom_liquid",
+        "label": "Custom Liquid",
+        "default": "<h2>Talk about your brand<\/h2><p>Use HTML to format your text so it can be easily read. This text can be used to share information about your brand with customers.<\/p>"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Custom Liquid"
+      }
+    ]
+  }
+{% endschema %}

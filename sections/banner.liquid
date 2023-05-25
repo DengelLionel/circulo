@@ -1,0 +1,106 @@
+{%- liquid
+  if template.name == 'cart'
+    assign title = 'cart.general.your_cart_title' | t
+  elsif template.name == 'list-collections'
+    assign title = 'collections.collection_list.title' | t
+  elsif template.name == 'search'
+    assign title = 'general.search.title' | t
+  else
+    assign title = [template.name].title
+  endif
+
+  if section.settings.banner_image != blank
+    assign banner_classes = 'banner banner--bg-image bg-' | append: section.settings.banner_image_position
+  else
+    assign banner_classes = 'banner banner--no-image'
+  endif
+-%}
+
+<div class="{{ banner_classes }}{% unless settings.show_breadcrumbs %} banner--no-breadcrumbs{% endunless %}">
+  {%- if section.settings.banner_image != blank -%}
+    {% render 'responsive-background', image: section.settings.banner_image, class: 'banner-image fixed-height' %}
+  {%- endif -%}
+  {%- if settings.show_breadcrumbs -%}
+    {%- liquid
+      assign show_rss_link = false
+      if template.name == 'blog'
+        assign show_rss_link = true
+      endif
+    -%}
+    {% render 'breadcrumbs', show_rss_link: show_rss_link %}
+  {%- endif -%}
+  <div class="banner__text container" data-cc-animate>
+    {%- if template.name == 'blog' and current_tags -%}
+      <h1>
+        <a href="{{ blog.url }}">{{ blog.title | link_to: blog.url }}</a>
+        {% for tag in current_tags %} / {{ tag }}{% endfor %}
+      </h1>
+    {%- else -%}
+      <h1>{{ title }}</h1>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Hero banner",
+    "class": "banner-candidate",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "The height of the hero banner can be adjusted in Theme Settings > Layout"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner_image",
+        "label": "Image",
+        "info": "Shown on all pages using this template"
+      },
+      {
+        "type": "select",
+        "id": "banner_image_position",
+        "label": "Image alignment",
+        "info": "Used to keep the subject of your image in view",
+        "options": [
+          {
+            "value": "tl",
+            "label": "Top left"
+          },
+          {
+            "value": "tc",
+            "label": "Top center"
+          },
+          {
+            "value": "tr",
+            "label": "Top right"
+          },
+          {
+            "value": "ml",
+            "label": "Middle left"
+          },
+          {
+            "value": "mc",
+            "label": "Middle center"
+          },
+          {
+            "value": "mr",
+            "label": "Middle right"
+          },
+          {
+            "value": "bl",
+            "label": "Bottom left"
+          },
+          {
+            "value": "bc",
+            "label": "Bottom center"
+          },
+          {
+            "value": "br",
+            "label": "Bottom right"
+          }
+        ],
+        "default": "mc"
+      }
+    ]
+  }
+{% endschema %}

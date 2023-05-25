@@ -1,0 +1,122 @@
+{%- liquid
+  if section.settings.show_collection_image
+    if collection.featured_image
+      assign img_src = collection.featured_image
+      assign has_image = true
+    endif
+  else
+    if section.settings.banner_image != blank
+      assign img_src = section.settings.banner_image
+      assign has_image = true
+    endif
+  endif
+
+  if has_image
+    assign banner_classes = 'banner banner--bg-image bg-' | append: section.settings.banner_image_position
+  else
+    assign banner_classes = 'banner banner--no-image'
+  endif
+-%}
+
+<div class="{{ banner_classes }}{% unless settings.show_breadcrumbs %} banner--no-breadcrumbs{% endunless %}">
+  {%- if has_image -%}
+    <div class="banner-image fixed-height rimage__image lazyload fade-in"
+         data-bgset="{% render 'bgset', image: img_src %}"
+         data-sizes="auto"
+         data-parent-fit="cover">
+    </div>
+    <noscript>
+      <div class="banner-image fixed-height" style="background-image: url({{ img_src | img_url: '2048x' }})"></div>
+    </noscript>
+  {%- endif -%}
+
+  {%- if settings.show_breadcrumbs -%}
+    {% render 'breadcrumbs' %}
+  {%- endif -%}
+
+  <div class="banner__text container" data-cc-animate>
+    <h1>{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <div class="rte reading-width align-center large-text" data-cc-animate data-cc-animate-delay="0.1s">
+        {{ collection.description }}
+      </div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Hero banner",
+    "class": "banner-candidate",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "The height of the hero banner can be adjusted in Theme Settings > Layout"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_collection_image",
+        "label": "Show collection image",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "Select image"
+      },
+      {
+        "type": "paragraph",
+        "content": "Alternatively, select an image to show on ALL collection pages"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner_image",
+        "label": "Image"
+      },
+      {
+        "type": "select",
+        "id": "banner_image_position",
+        "label": "Image alignment",
+        "info": "Used to keep the subject of your image in view",
+        "options": [
+          {
+            "value": "tl",
+            "label": "Top left"
+          },
+          {
+            "value": "tc",
+            "label": "Top center"
+          },
+          {
+            "value": "tr",
+            "label": "Top right"
+          },
+          {
+            "value": "ml",
+            "label": "Middle left"
+          },
+          {
+            "value": "mc",
+            "label": "Middle center"
+          },
+          {
+            "value": "mr",
+            "label": "Middle right"
+          },
+          {
+            "value": "bl",
+            "label": "Bottom left"
+          },
+          {
+            "value": "bc",
+            "label": "Bottom center"
+          },
+          {
+            "value": "br",
+            "label": "Bottom right"
+          }
+        ],
+        "default": "mc"
+      }
+    ]
+  }
+{% endschema %}

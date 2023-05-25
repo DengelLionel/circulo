@@ -1,0 +1,100 @@
+{%- liquid
+  if section.settings.banner_image != blank
+    assign banner_classes = 'banner banner--bg-image bg-' | append: section.settings.banner_image_position
+  else
+    assign banner_classes = 'banner banner--no-image'
+  endif
+-%}
+
+<div class="{{ banner_classes }}{% unless settings.show_breadcrumbs %} banner--no-breadcrumbs{% endunless %}">
+  {%- if section.settings.banner_image != blank -%}
+    {% render 'responsive-background', image: section.settings.banner_image, class: 'banner-image fixed-height' %}
+  {%- endif -%}
+  {%- if settings.show_breadcrumbs -%}
+    {% render 'breadcrumbs', show_next_prev: true %}
+  {%- endif -%}
+  <div class="banner__text container" data-cc-animate>
+    {%- if section.settings.show_title -%}
+      <h1>{{ product.title }}</h1>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Hero banner",
+    "class": "banner-candidate",
+    "settings": [
+      {
+        "type": "paragraph",
+        "content": "The height of the hero banner can be adjusted in Theme Settings > Layout"
+      },
+      {
+        "type": "image_picker",
+        "id": "banner_image",
+        "label": "Image",
+        "info": "Shown on all products"
+      },
+      {
+        "type": "select",
+        "id": "banner_image_position",
+        "label": "Image alignment",
+        "info": "Used to keep the subject of your image in view",
+        "options": [
+          {
+            "value": "tl",
+            "label": "Top left"
+          },
+          {
+            "value": "tc",
+            "label": "Top center"
+          },
+          {
+            "value": "tr",
+            "label": "Top right"
+          },
+          {
+            "value": "ml",
+            "label": "Middle left"
+          },
+          {
+            "value": "mc",
+            "label": "Middle center"
+          },
+          {
+            "value": "mr",
+            "label": "Middle right"
+          },
+          {
+            "value": "bl",
+            "label": "Bottom left"
+          },
+          {
+            "value": "bc",
+            "label": "Bottom center"
+          },
+          {
+            "value": "br",
+            "label": "Bottom right"
+          }
+        ],
+        "default": "mc"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_title",
+        "label": "Show product title in banner",
+        "info": "If showing product title here, ensure you hide it in the product details section.",
+        "default": false
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero banner"
+      }
+    ],
+    "templates": [
+      "product"
+    ]
+  }
+{% endschema %}

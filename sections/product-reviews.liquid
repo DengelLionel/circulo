@@ -1,0 +1,20 @@
+<div class="spaced-section container" data-cc-animate>
+  <div class="theme-product-reviews-full" id="shopify-product-reviews" data-id="{{ product.id }}">
+    {{ product.metafields.spr.reviews }}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Product reviews",
+    "tag": "section",
+    "presets": [
+      {
+        "name": "Product reviews"
+      }
+    ],
+    "templates": [
+      "product"
+    ]
+  }
+{% endschema %}

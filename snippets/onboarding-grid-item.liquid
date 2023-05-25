@@ -1,0 +1,36 @@
+{%- liquid
+  if items_per_row == 2
+    assign col_class = 'half'
+  elsif items_per_row == 3
+    assign col_class = 'third'
+  elsif items_per_row == 5
+    assign col_class = 'fifth'
+  else
+    assign col_class = 'quarter'
+  endif
+-%}
+
+<div class="prod-block{% if is_product == false %} coll-block{% endif %} column {{ col_class }}" {{ block.shopify_attributes }}>
+  <div class="prod-image-wrap">
+    <div class="placeholder-wrapper"{% if aspect_ratio %} style="padding-top:{{ 1 | divided_by: aspect_ratio | times: 100 }}%"{% endif %}>
+      {%- capture placeholder_svg_name -%}product-{{ forloop.index0 | modulo: 6 | plus: 1 }}{%- endcapture -%}
+      {{ placeholder_svg_name | placeholder_svg_tag: 'placeholder' }}
+    </div>
+  </div>
+  <div class="prod-caption">
+    <div>
+      <div class="title">
+        {%- if is_product -%}
+          {{ 'homepage.onboarding.product_title' | t }}
+        {%- else -%}
+          {{ 'collections.collection_list.empty_collection_title' | t }}
+        {%- endif -%}
+      </div>
+      {%- if is_product -%}
+        <div class="product-price">
+          <span class="product-price__amount theme-money">{{ 1000 | money }}</span>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>

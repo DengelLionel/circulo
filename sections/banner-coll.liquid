@@ -44,7 +44,7 @@
   {%- if has_image -%}
     <div
       class="banner-imag fixed-heigh"
-      style="background-image: url({{ img_src  }})"
+      style="background-image: url({{ img_src| img_url  }})"
       data-sizes="auto"
       data-parent-fit="cover"></div>
     <noscript>

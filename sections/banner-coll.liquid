@@ -39,6 +39,12 @@
     top: 0;
     z-index: 999;
   }
+  .container_banner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  }
   @media screen and (min-width:640px) {
     .banner-imag.fixed-heigh {
       background-image: url('{{ img_src| img_url: '720x' }}')
@@ -68,7 +74,7 @@
     {% render 'breadcrumbs' %}
   {%- endif -%}
 
-  <div class="banner__text container">
+  <div class="container_banner">
     <h1>{{ collection.title }}</h1>
     {%- if collection.description != blank -%}
       <div class="rte reading-width align-center large-text">

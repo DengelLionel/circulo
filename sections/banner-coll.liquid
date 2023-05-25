@@ -29,13 +29,13 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-
+    background-image: url('{{ img_src| img_url }}')
   }
   @media screen and (min-width: 1024px) {
     .banner-imag.fixed-heigh {
 
       height: 400px;
-
+      background-image: url('{{ img_src| img_url: '2048x' }}')
     }
 
   }
@@ -44,11 +44,10 @@
   {%- if has_image -%}
     <div
       class="banner-imag fixed-heigh"
-      style="background-image: url({{ img_src| img_url  }})"
       data-sizes="auto"
       data-parent-fit="cover"></div>
     <noscript>
-      <div class="banner-image fixed-height" style="background-image: url({{ img_src | img_url }})"></div>
+      <div class="banner-image fixed-height" style="background-image: url({{ img_src  }})"></div>
     </noscript>
   {%- endif -%}
 

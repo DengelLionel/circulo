@@ -29,7 +29,7 @@
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    background-image: url('{{ img_src }}');
+
   }
   @media screen and (min-width: 1024px) {
     .banner-imag.fixed-heigh {
@@ -44,6 +44,7 @@
   {%- if has_image -%}
     <div
       class="banner-imag fixed-heigh"
+      style="background-image: url({{ img_src  }})"
       data-sizes="auto"
       data-parent-fit="cover"></div>
     <noscript>

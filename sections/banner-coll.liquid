@@ -17,14 +17,34 @@
     assign banner_classes = 'banner banner--no-image'
   endif
 -%}
+<style>
+  .banner-imag.fixed-heigh {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 250px;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+  }
+  @media screen and (min-width: 1024px) {
+    .banner-imag.fixed-heigh {
 
+      height: 400px;
+
+    }
+
+  }
+</style>
 <div class="{{ banner_classes }}{% unless settings.show_breadcrumbs %} banner--no-breadcrumbs{% endunless %}">
   {%- if has_image -%}
-    <div class="banner-image fixed-height rimage__image lazyload fade-in"
-         data-bgset="{% render 'bgset', image: img_src %}"
-         data-sizes="auto"
-         data-parent-fit="cover">
-    </div>
+    <div
+      class="banner-imag fixed-heigh"
+      data-bgset="{% render 'bgset', image: img_src %}"
+      data-sizes="auto"
+      data-parent-fit="cover"></div>
     <noscript>
       <div class="banner-image fixed-height" style="background-image: url({{ img_src | img_url: '2048x' }})"></div>
     </noscript>
@@ -37,7 +57,10 @@
   <div class="banner__text container" data-cc-animate>
     <h1>{{ collection.title }}</h1>
     {%- if collection.description != blank -%}
-      <div class="rte reading-width align-center large-text" data-cc-animate data-cc-animate-delay="0.1s">
+      <div
+        class="rte reading-width align-center large-text"
+        data-cc-animate
+        data-cc-animate-delay="0.1s">
         {{ collection.description }}
       </div>
     {%- endif -%}
@@ -66,13 +89,11 @@
       {
         "type": "paragraph",
         "content": "Alternatively, select an image to show on ALL collection pages"
-      },
-      {
+      }, {
         "type": "image_picker",
         "id": "banner_image",
         "label": "Image"
-      },
-      {
+      }, {
         "type": "select",
         "id": "banner_image_position",
         "label": "Image alignment",
@@ -93,24 +114,19 @@
           {
             "value": "ml",
             "label": "Middle left"
-          },
-          {
+          }, {
             "value": "mc",
             "label": "Middle center"
-          },
-          {
+          }, {
             "value": "mr",
             "label": "Middle right"
-          },
-          {
+          }, {
             "value": "bl",
             "label": "Bottom left"
-          },
-          {
+          }, {
             "value": "bc",
             "label": "Bottom center"
-          },
-          {
+          }, {
             "value": "br",
             "label": "Bottom right"
           }

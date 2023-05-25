@@ -53,10 +53,10 @@
 
   }
 </style>
-<div class="fondo {{ banner_classes }}{% unless settings.show_breadcrumbs %} banner--no-breadcrumbs{% endunless %}">
+<div class=" {{ banner_classes }}{% unless settings.show_breadcrumbs %} banner--no-breadcrumbs{% endunless %}">
   {%- if has_image -%}
     <div
-      class="banner-imag fixed-heigh"
+      class="banner-imag fixed-heigh fondo"
       data-sizes="auto"
       data-parent-fit="cover"></div>
     <noscript>
@@ -68,13 +68,10 @@
     {% render 'breadcrumbs' %}
   {%- endif -%}
 
-  <div class="banner__text container" data-cc-animate>
+  <div class="banner__text container">
     <h1>{{ collection.title }}</h1>
     {%- if collection.description != blank -%}
-      <div
-        class="rte reading-width align-center large-text"
-        data-cc-animate
-        data-cc-animate-delay="0.1s">
+      <div class="rte reading-width align-center large-text">
         {{ collection.description }}
       </div>
     {%- endif -%}

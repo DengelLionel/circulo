@@ -32,11 +32,11 @@
     background-image: url('{{ img_src| img_url: '360x' }}')
   }
   .fondo {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  .banner-imag.fixed-heigh.fondo {
+    position: relative;
     background-color: rgba(0, 0, 0, 0.5);
     z-index: 999;
+    width: 100%;
+    height: auto;
   }
 
   @media screen and (min-width:640px) {
@@ -55,12 +55,15 @@
 </style>
 <div class=" {{ banner_classes }}{% unless settings.show_breadcrumbs %} banner--no-breadcrumbs{% endunless %}">
   {%- if has_image -%}
-    <div
-      class="banner-imag fixed-heigh fondo"
-      data-sizes="auto"
-      data-parent-fit="cover"></div>
+    <div class="fondo">
+      <div
+        class="banner-imag fixed-heigh "
+        data-sizes="auto"
+        data-parent-fit="cover"></div>
+    </div>
+
     <noscript>
-      <div class="banner-imag fixed-heigh fondo" style="background-image: url({{ img_src  }})"></div>
+      <div class="banner-imag fixed-heigh" style="background-image: url({{ img_src  }})"></div>
     </noscript>
   {%- endif -%}
 

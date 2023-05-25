@@ -12,7 +12,7 @@
   endif
 
   if has_image
-    assign banner_classes = ' bg-' | append: section.settings.banner_image_position
+    assign banner_classes = 'banner banner--bg-image bg-' | append: section.settings.banner_image_position
   else
     assign banner_classes = 'banner banner--no-image'
   endif

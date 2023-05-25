@@ -203,9 +203,24 @@
         {{ header_alignment_class }}"
         {% if section.settings.enable_inline_links %}data-nav-inline="true"{% endif %}
         id="pageheader__contents">
-
+        <style>
+          .header-leftt {
+            width: 88px;
+            height: 44px;
+          }
+          .header-itemss {
+            flex: 0 1 100%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            position: relative;
+            right: -10px;
+            width: 88px;
+            height: 44px;
+          }
+        </style>
         <div class="pageheader__layout">
-          <div class="header-left">
+          <div class="header-leftt">
             {%- if section.settings.enable_inline_links -%}
               <div class="site-control__inline-links">
                 <div
@@ -253,9 +268,9 @@
                             <ul
                               {% if has_mega_drop_down %}
                               class="nav-columns nav-columns--count-{{ link.links.size }}
-                                                            {% if link.links.size > 2 %} nav-columns--count-3-or-more {% endif %}
-                                                            {% if link.links.size > 5 %} nav-columns--count-6-or-more {% endif %}
-                                                            nav-columns--cta-count-{{ num_ctas }}"
+                                                                                            {% if link.links.size > 2 %} nav-columns--count-3-or-more {% endif %}
+                                                                                            {% if link.links.size > 5 %} nav-columns--count-6-or-more {% endif %}
+                                                                                            nav-columns--cta-count-{{ num_ctas }}"
                               {% else %}
                               class="nav-rows"
                               {% endif %}>
@@ -643,18 +658,7 @@
                 itemprop="url">{{ shop.name }}</a>
             {%- endif -%}
           </div>
-          <style>
-            .header-itemss {
-              flex: 0 1 100%;
-              display: flex;
-              justify-content: flex-end;
-              align-items: center;
-              position: relative;
-              right: -10px;
-              width: 88px;
-              height: 44px;
-            }
-          </style>
+
           <div class="header-itemss">
             {%- if section.settings.enable_inline_links -%}
               {%- if section.settings.show_locale_selector or section.settings.show_currency_selector -%}

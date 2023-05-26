@@ -11,12 +11,14 @@
   <div class="rimage-wrapper lazyload--placeholder" {% if aspect_ratio %}style="padding-top:{{ 1 | divided_by: aspect_ratio | times: 100 }}%"{% endif %}>
     {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
     <img
+      data-swift-lazy="1"
       loading="lazy"
       class="rimage__image lazyload{% if manual_image_load %}--manual{% endif %} fade-in{% if cover %} cover{% endif %}{% if contain %} contain{% endif %}"
-
-      data-src="{{ img_url }}"
+      data-srcset="{{ img_url }}"
       width="{{ image.width }}"
       height="{{ image.height }}"
+      data-aspectratio="{{ image.aspect_ratio }}"
+      data-sizes="auto"
       alt="{{ image.alt | escape }}"
       {% if cover %}data-parent-fit="cover"{% endif %}>
 

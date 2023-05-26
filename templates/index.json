@@ -22,6 +22,7 @@
         "slide-0": {
           "type": "image",
           "settings": {
+            "image": "shopify:\/\/shop_images\/3000-Filorga-Bolsa-Promo-BANNER_720x_fb510ff7-f827-4cad-9dfd-5241955f9093.webp",
             "image_url": "shopify:\/\/collections\/cumlaude-lab",
             "tint_color": "#000000",
             "tint_opacity": 0,
@@ -36,6 +37,7 @@
         },
         "3c38e431-5298-4ff6-ae91-f15721e99bbe": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image_url": "shopify:\/\/collections\/filorga",
             "tint_color": "#000000",

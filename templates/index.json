@@ -6,7 +6,8 @@
         "b8a6a885-e32a-469c-acbf-7525a34aca5a": {
           "type": "image",
           "settings": {
-            "image_url": "shopify:\/\/collections\/skinceuticals",
+            "image": "shopify:\/\/shop_images\/masajeador_de_pies_pies.jpg",
+            "image_url": "",
             "tint_color": "#000000",
             "tint_opacity": 0,
             "color": "#ffffff",

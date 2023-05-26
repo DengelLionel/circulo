@@ -47,7 +47,7 @@
                 {%- if section.settings.fixed_height -%}
                   {%- render 'responsive-background', image: block.settings.image, class: 'slide__image-bg', manual_image_load: true -%}
                 {%- else -%}
-                  {%- render 'responsive-image', image: block.settings.image, manual_image_load: true, no_max_width: true -%}
+                  {%- render 'responsive-image-grid', image: block.settings.image, manual_image_load: true, no_max_width: true -%}
                 {%- endif -%}
               {%- else -%}
                 {%- capture placeholder -%}lifestyle-{% cycle "1", "2" %}{%- endcapture -%}

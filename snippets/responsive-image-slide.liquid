@@ -1,0 +1,58 @@
+{%- liquid
+  if aspect_ratio
+    assign cover = true
+  else
+    assign aspect_ratio = image.aspect_ratio
+    assign cover = false
+  endif
+-%}
+<style>
+  .estilo_slide_mobil {
+    display: block;
+  }
+  .estilo_slide_desktop {
+    display: none;
+  }
+  @media screen and (min-width: 768px) {
+    .estilo_slide_mobil {
+      display: none;
+    }
+    .estilo_slide_desktop {
+      display: block;
+    }
+  }
+</style>
+<div class="rimage-outer-wrapper" {% unless cover or no_max_width %}style="max-width: {{ image.width }}px"{% endunless %}{% if animate %}data-cc-animate="cc-zoom-out"{% endif %}>
+  <div class="rimage-wrapper lazyload--placeholder" {% if aspect_ratio %}style="padding-top:{{ 1 | divided_by: aspect_ratio | times: 100 }}%"{% endif %}>
+    {%- assign img_url = image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+    <div class="estilo_slide_mobil">
+      <img
+        data-swift-lazy="1"
+        loading="lazy"
+        class="rimage__image lazyload{% if manual_image_load %}--manual{% endif %} fade-in{% if cover %} cover{% endif %}{% if contain %} contain{% endif %}"
+        data-srcset="{{ img_url }}"
+        style="width:100%; height:125.81px;"
+        data-aspectratio="{{ image.aspect_ratio }}"
+        data-sizes="auto"
+        alt="{{ image.alt | escape }}"
+        {% if cover %}data-parent-fit="cover"{% endif %}>
+    </div>
+    <div class="estilo_slide_desktop">
+      <img
+        data-swift-lazy="1"
+        loading="lazy"
+        class="rimage__image lazyload{% if manual_image_load %}--manual{% endif %} fade-in{% if cover %} cover{% endif %}{% if contain %} contain{% endif %}"
+        data-srcset="{{ img_url }}"
+        width="{{ image.width }}"
+        height="{{ image.height }}"
+        data-aspectratio="{{ image.aspect_ratio }}"
+        data-sizes="auto"
+        alt="{{ image.alt | escape }}"
+        {% if cover %}data-parent-fit="cover"{% endif %}>
+    </div>
+
+
+
+  </div>
+</div>
+{%- assign aspect_ratio = false -%}

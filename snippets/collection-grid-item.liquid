@@ -10,10 +10,10 @@
   endif
 -%}
 
-<div class="prod-block coll-block column {{ col_class }}"{% if animate %} data-cc-animate="cc-fade-in-up" data-cc-animate-delay="{{ animate | times: 0.15 }}s"{% endif %} {{ block.shopify_attributes }}>
+<div class="prod-block coll-block column {{ col_class }}"{% if animate %}data-cc-animate="cc-fade-in-up"data-cc-animate-delay="{{ animate | times: 0.15 }}s"{% endif %} {{ block.shopify_attributes }}>
   <div class="prod-image-wrap">
     <a href="{{ collection.url }}">
-      {%- render 'responsive-image', image: image, aspect_ratio: aspect_ratio -%}
+      {%- render 'responsive-image-grid', image: image, aspect_ratio: aspect_ratio -%}
     </a>
   </div>
   <div class="prod-caption">
